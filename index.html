@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasks</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f7; color: #1d1d1f; font-size: 13px; }
+  header { background: #1d1d1f; color: #f5f5f7; padding: 20px 32px; display: flex; align-items: center; gap: 16px; }
+  header h1 { font-size: 18px; font-weight: 600; }
+  header .subtitle { font-size: 12px; opacity: 0.5; }
+  .summary { display: flex; gap: 12px; padding: 20px 32px; }
+  .card { background: white; border-radius: 10px; padding: 14px 20px; flex: 1; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .card .num { font-size: 28px; font-weight: 700; }
+  .card .label { font-size: 11px; color: #888; margin-top: 2px; }
+  .card.todo .num { color: #8e8e93; }
+  .card.wip .num { color: #007aff; }
+  .card.done .num { color: #34c759; }
+  .today-wrap { margin: 0 32px 20px; background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 16px 20px; }
+  .section-title { font-size: 11px; font-weight: 700; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
+  .ts-group { margin-bottom: 10px; }
+  .ts-group .tag { margin-right: 8px; }
+  .ts-group ul { margin: 6px 0 0 16px; }
+  .ts-group li { font-size: 12px; color: #333; line-height: 1.8; }
+  .no-tasks { font-size: 12px; color: #aaa; }
+  .filters { padding: 0 32px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .filter-row { display: flex; align-items: center; gap: 8px; }
+  .filter-row > div { display: flex; gap: 6px; }
+  .filter-label { font-size: 11px; color: #888; width: 60px; }
+  .filter-btn { border: 1px solid #d1d1d6; background: white; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { background: #f0f0f5; }
+  .filter-btn.active { background: #1d1d1f; color: white; border-color: #1d1d1f; }
+  .table-wrap { margin: 0 32px 20px; background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #f5f5f7; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 600; color: #888; border-bottom: 1px solid #e5e5ea; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f0f0f5; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr.hidden { display: none; }
+  tr:hover td { background: #fafafa; }
+  .id { color: #aaa; font-size: 11px; }
+  .phase { color: #555; font-size: 11px; }
+  .action { font-weight: 500; }
+  .deadline { font-variant-numeric: tabular-nums; color: #555; }
+  .deadline-overdue { color: #c0392b; }
+  .note { color: #aaa; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: #e8e8ed; color: #3a3a3c; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 500; }
+  .status-todo { background: #e8e8ed; color: #3a3a3c; }
+  .status-wip { background: #e1f0ff; color: #007aff; }
+  .status-done { background: #d1f5dc; color: #1a7f37; }
+  .priority-high { background: #ffe5e5; color: #c0392b; }
+  .priority-mid { background: #fff3cd; color: #856404; }
+  .priority-low { background: #e8e8ed; color: #555; }
+  .priority-none { background: transparent; color: #ccc; }
+  .tech-trends-wrap { margin: 0 32px 32px; background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 16px 20px; }
+  .tech-trends-body h3.tt-date { font-size: 13px; font-weight: 700; color: #1d1d1f; margin-bottom: 10px; }
+  .tech-trends-body h4.tt-section { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin: 12px 0 6px; }
+  .tech-trends-body ul { margin-left: 16px; }
+  .tech-trends-body li { font-size: 12px; color: #333; line-height: 1.9; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Tasks</h1>
+    <div class="subtitle">Spline Design Hub</div>
+  </div>
+</header>
+
+<div class="today-wrap">
+  <div class="section-title">今日のタスク</div>
+  <div class="ts-group"><span class="tag">ggg</span><ul><li>⚠️ Cekaiに日程確認（5/11）</li><li>⚠️ 見積もりフォームでコスト洗い出し（5/12）</li><li>⚠️ 見積もり3割増にして共有（5/12）</li></ul></div><div class="ts-group"><span class="tag">itl</span><ul><li>⚠️ ざっくり設計/1台あたりのお金洗い出し（5/12）</li><li>全体構成・フレーム設計（進行中）</li><li>可動部・機構設計（進行中）</li><li>電装スペース・配線ルート設計（進行中）</li></ul></div>
+</div>
+
+<div class="summary">
+  <div class="card todo"><div class="num">39</div><div class="label">未着手</div></div>
+  <div class="card wip"><div class="num">3</div><div class="label">進行中</div></div>
+  <div class="card done"><div class="num">4</div><div class="label">完了</div></div>
+  <div class="card"><div class="num">46</div><div class="label">合計</div></div>
+</div>
+
+<div class="filters">
+  <div class="filter-row">
+    <span class="filter-label">プロジェクト</span>
+    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'Fukui Murata', this)">Fukui Murata</button><button class="filter-btn" onclick="filter('project', 'claude', this)">claude</button><button class="filter-btn" onclick="filter('project', 'ggg', this)">ggg</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button></div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">ステータス</span>
+    <div id="status-filters"><button class="filter-btn active" onclick="filter('status', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('status', '未着手', this)">未着手</button><button class="filter-btn" onclick="filter('status', '進行中', this)">進行中</button><button class="filter-btn" onclick="filter('status', '完了', this)">完了</button></div>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>プロジェクト</th><th>フェーズ</th><th>課題</th><th>アクション</th>
+        <th>優先度</th><th>ステータス</th><th>期限</th><th>備考</th>
+      </tr>
+    </thead>
+    <tbody id="task-body">
+      
+        <tr data-project="ggg" data-status="未着手">
+            <td class="id">1</td>
+            <td><span class="tag project">ggg</span></td>
+            <td class="phase">7.組み立て</td>
+            <td>球の動き未検証</td>
+            <td class="action">塗装乾燥後組み立て</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/13</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="ggg" data-status="未着手">
+            <td class="id">2</td>
+            <td><span class="tag project">ggg</span></td>
+            <td class="phase">8.本番品テスト</td>
+            <td>球の動き未検証</td>
+            <td class="action">MEXEを繋いでテスト</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/13</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="ggg" data-status="未着手">
+            <td class="id">3</td>
+            <td><span class="tag project">ggg</span></td>
+            <td class="phase">8.本番品テスト</td>
+            <td>球の動き未検証</td>
+            <td class="action">調整</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/13</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="ggg" data-status="未着手">
+            <td class="id">4</td>
+            <td><span class="tag project">ggg</span></td>
+            <td class="phase">10.現場設営</td>
+            <td>現場日程不明</td>
+            <td class="action">Cekaiに日程確認</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/11</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="ggg" data-status="未着手">
+            <td class="id">5</td>
+            <td><span class="tag project">ggg</span></td>
+            <td class="phase">1.アイディエーション</td>
+            <td>コスト不明確</td>
+            <td class="action">見積もりフォームでコスト洗い出し</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/12</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">6</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">1.アイディエーション</td>
+            <td>コスト不明確</td>
+            <td class="action">ざっくり設計/1台あたりのお金洗い出し</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/12</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="Fukui Murata" data-status="未着手">
+            <td class="id">7</td>
+            <td><span class="tag project">Fukui Murata</span></td>
+            <td class="phase">-</td>
+            <td>工程7不具合</td>
+            <td class="action">現場5/28/一時的に電源を抜いて停止可能か確認</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/28</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="完了">
+            <td class="id">8</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">1.アイディエーション</td>
+            <td>コンセプト未確定</td>
+            <td class="action">展示構成・動きのアイデア出し</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-done">完了</span></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="完了">
+            <td class="id">9</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>仕様未確定</td>
+            <td class="action">台数・サイズ・動作仕様を決定</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-done">完了</span></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="完了">
+            <td class="id">10</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>予算未確定</td>
+            <td class="action">全体予算・1台あたりコスト確定</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-done">完了</span></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="完了">
+            <td class="id">11</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>スケジュール未確定</td>
+            <td class="action">現場逆算でマイルストーン設定</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-done">完了</span></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="進行中">
+            <td class="id">12</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>設計未着手</td>
+            <td class="action">全体構成・フレーム設計</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-wip">進行中</span></td>
+            <td class="deadline">7/31</td>
+            <td class="note">6/1〜</td>
+        </tr>
+        <tr data-project="itl" data-status="進行中">
+            <td class="id">13</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>設計未着手</td>
+            <td class="action">可動部・機構設計</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-wip">進行中</span></td>
+            <td class="deadline">7/31</td>
+            <td class="note">6/1〜</td>
+        </tr>
+        <tr data-project="itl" data-status="進行中">
+            <td class="id">14</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>設計未着手</td>
+            <td class="action">電装スペース・配線ルート設計</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-wip">進行中</span></td>
+            <td class="deadline">7/31</td>
+            <td class="note">6/1〜</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">15</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">4.プロトタイプテスト</td>
+            <td>プロト未製作</td>
+            <td class="action">3Dプリントでプロト製作</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">9/10</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">16</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">4.プロトタイプテスト</td>
+            <td>プロト未製作</td>
+            <td class="action">動作・強度確認・課題洗い出し</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">9/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">17</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">5.CAD修正</td>
+            <td>修正未着手</td>
+            <td class="action">プロトフィードバック反映・図面更新</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">10/10</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">18</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">6.発注</td>
+            <td>発注未着手</td>
+            <td class="action">部品リスト作成（Misumi/Wilco）</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">10/20</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">19</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">6.発注</td>
+            <td>発注未着手</td>
+            <td class="action">発注・納期確認</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">10/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">20</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">7.組み立て</td>
+            <td>組み立て未着手</td>
+            <td class="action">機構組み立て</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">11/15</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">21</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">7.組み立て</td>
+            <td>組み立て未着手</td>
+            <td class="action">配線・電装組み込み</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">11/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">22</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">8.本番品テスト</td>
+            <td>テスト未着手</td>
+            <td class="action">動作確認・調整</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">11/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">23</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">9.ソフトウェア組み込み</td>
+            <td>実装未着手</td>
+            <td class="action">Dynamixel制御プログラム実装</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">12/10</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">24</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">9.ソフトウェア組み込み</td>
+            <td>実装未着手</td>
+            <td class="action">統合テスト・パラメータ調整</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">12/15</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">25</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">10.現場設営</td>
+            <td>設営未着手</td>
+            <td class="action">搬入・設営（12/16-17）</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">12/16</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="itl" data-status="未着手">
+            <td class="id">26</td>
+            <td><span class="tag project">itl</span></td>
+            <td class="phase">10.現場設営</td>
+            <td>設営未着手</td>
+            <td class="action">オープニング前最終確認（12/18）</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">12/18</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">27</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">1.アイディエーション</td>
+            <td>コンセプト未確定</td>
+            <td class="action">展示構成・動きのアイデア出し</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/20</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">28</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>仕様未確定</td>
+            <td class="action">台数・サイズ・動作仕様を決定</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">29</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>予算未確定</td>
+            <td class="action">全体予算・1台あたりコスト確定</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">30</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>スケジュール未確定</td>
+            <td class="action">現場逆算でマイルストーン設定</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">31</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>設計未着手</td>
+            <td class="action">全体構成・フレーム設計</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">6/20</td>
+            <td class="note">6/1〜</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">32</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>設計未着手</td>
+            <td class="action">可動部・機構設計</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">6/20</td>
+            <td class="note">6/1〜</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">33</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>設計未着手</td>
+            <td class="action">電装スペース・配線ルート設計</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">6/20</td>
+            <td class="note">6/1〜</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">34</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">4.プロトタイプテスト</td>
+            <td>プロト未製作</td>
+            <td class="action">3Dプリントでプロト製作</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">6/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">35</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">4.プロトタイプテスト</td>
+            <td>プロト未製作</td>
+            <td class="action">動作・強度確認・課題洗い出し</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">7/5</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">36</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">5.CAD修正</td>
+            <td>修正未着手</td>
+            <td class="action">プロトフィードバック反映・図面更新</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">7/10</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">37</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">6.発注</td>
+            <td>発注未着手</td>
+            <td class="action">部品リスト作成（Misumi/Wilco）</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">7/20</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">38</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">6.発注</td>
+            <td>発注未着手</td>
+            <td class="action">発注・納期確認</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">8/1</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">39</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">7.組み立て</td>
+            <td>組み立て未着手</td>
+            <td class="action">機構組み立て</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">8/10</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">40</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">7.組み立て</td>
+            <td>組み立て未着手</td>
+            <td class="action">配線・電装組み込み</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">8/20</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">41</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">8.本番品テスト</td>
+            <td>テスト未着手</td>
+            <td class="action">動作確認・調整</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">8/25</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">42</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">9.ソフトウェア組み込み</td>
+            <td>実装未着手</td>
+            <td class="action">Dynamixel制御プログラム実装</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">9/5</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">43</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">9.ソフトウェア組み込み</td>
+            <td>実装未着手</td>
+            <td class="action">統合テスト・パラメータ調整</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">9/10</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">44</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">10.現場設営</td>
+            <td>設営未着手</td>
+            <td class="action">搬入・設営</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">9/15</td>
+            <td class="note">中旬想定</td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">45</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">1.アイディエーション</td>
+            <td>使用未確定</td>
+            <td class="action">構想をUSNに共有</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="ggg" data-status="未着手">
+            <td class="id">46</td>
+            <td><span class="tag project">ggg</span></td>
+            <td class="phase">-</td>
+            <td>見積もり未共有</td>
+            <td class="action">見積もり3割増にして共有</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">5/12</td>
+            <td class="note">-</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tech-trends-wrap">
+  <div class="section-title">Tech Trends</div>
+  <div class="tech-trends-body"><h3 class="tt-date">2026/05/12</h3><h4 class="tt-section">Tech Trends</h4><ul><li>量子コンピュータIPO相次ぐ：Xanadu・Infleqtion・Horizon Quantumが2026年に上場。光子ベースの量子通信が120km光ファイバーで実証</li><li>半導体産業が年間売上$1T目標へ。AI加速器・データセンターネットワーク・HBMメモリが牽引</li><li>フォトニックコンピューティング台頭：NeuraWaveが推論を低消費電力で処理。ロボット・自律走行・防衛向けにエッジ展開</li><li>AIと核融合エネルギーがNatureにて2026年のアジェンダ設定技術として選出</li><li>Blue OriginのBlue Alchemist：月面レゴリスから電気分解で酸素と金属を抽出する自律デモを今年実施予定</li></ul><h4 class="tt-section">注目銘柄</h4><ul><li>$QUBT：Quantum Computing Inc. — フォトニック推論チップ「NeuraWave」を発表。エッジAI×量子の交差点</li><li>$IONQ：IonQ — イオントラップ型量子コンピュータ。120km量子暗号実証の追い風で通信・防衛需要が拡大</li><li>$NVDA：NVIDIA — 物理AI・ロボティクス向けにBlackwellが採用拡大。半導体$1T市場の中心</li></ul></div>
+</div>
+
+<script>
+  let activeProject = 'ALL';
+  let activeStatus = 'ALL';
+
+  function filter(type, value, btn) {
+    if (type === 'project') {
+      activeProject = value;
+      document.querySelectorAll('#proj-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    } else {
+      activeStatus = value;
+      document.querySelectorAll('#status-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    }
+    btn.classList.add('active');
+    applyFilter();
+  }
+
+  function applyFilter() {
+    document.querySelectorAll('#task-body tr').forEach(row => {
+      const matchP = activeProject === 'ALL' || row.dataset.project === activeProject;
+      const matchS = activeStatus === 'ALL' || row.dataset.status === activeStatus;
+      row.classList.toggle('hidden', !(matchP && matchS));
+    });
+  }
+
+  function markOverdueDeadlines() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    document.querySelectorAll('#task-body .deadline').forEach(cell => {
+      const text = cell.textContent.trim();
+      if (text === '-') return;
+      const parts = text.split('/');
+      if (parts.length < 2) return;
+      const deadline = new Date(today.getFullYear(), parseInt(parts[0], 10) - 1, parseInt(parts[1], 10));
+      if (deadline <= today) cell.classList.add('deadline-overdue');
+    });
+  }
+
+  markOverdueDeadlines();
+</script>
+</body>
+</html>
