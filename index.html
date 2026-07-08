@@ -80,16 +80,16 @@
 </div>
 
 <div class="summary">
-  <div class="card todo"><div class="num">13</div><div class="label">未着手</div></div>
+  <div class="card todo"><div class="num">14</div><div class="label">未着手</div></div>
   <div class="card wip"><div class="num">2</div><div class="label">進行中</div></div>
   <div class="card done"><div class="num">0</div><div class="label">完了</div></div>
-  <div class="card"><div class="num">15</div><div class="label">合計</div></div>
+  <div class="card"><div class="num">16</div><div class="label">合計</div></div>
 </div>
 
 <div class="filters">
   <div class="filter-row">
     <span class="filter-label">プロジェクト</span>
-    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'PR', this)">PR</button><button class="filter-btn" onclick="filter('project', 'claude', this)">claude</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button></div>
+    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'PR', this)">PR</button><button class="filter-btn" onclick="filter('project', 'claude', this)">claude</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button><button class="filter-btn" onclick="filter('project', 'jpj', this)">jpj</button></div>
   </div>
   <div class="filter-row">
     <span class="filter-label">ステータス</span>
@@ -271,6 +271,17 @@
             <td><span class="badge priority-none">-</span></td>
             <td><span class="badge status-todo">未着手</span></td>
             <td class="deadline">-</td>
+            <td class="note">-</td>
+        </tr>
+        <tr data-project="jpj" data-status="未着手">
+            <td class="id">35</td>
+            <td><span class="tag project">jpj</span></td>
+            <td class="phase">-</td>
+            <td>-</td>
+            <td class="action">和傘モーメント計測</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo">未着手</span></td>
+            <td class="deadline">7/15</td>
             <td class="note">-</td>
         </tr>
     </tbody>
