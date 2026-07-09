@@ -90,10 +90,10 @@
 </div>
 
 <div class="summary">
-  <div class="card todo"><div class="num">10</div><div class="label">未着手</div></div>
+  <div class="card todo"><div class="num">11</div><div class="label">未着手</div></div>
   <div class="card wip"><div class="num">3</div><div class="label">進行中</div></div>
   <div class="card done"><div class="num">0</div><div class="label">完了</div></div>
-  <div class="card"><div class="num">13</div><div class="label">合計</div></div>
+  <div class="card"><div class="num">14</div><div class="label">合計</div></div>
 </div>
 
 <div class="filters">
@@ -281,6 +281,18 @@
             <td class="deadline">7/15</td>
             <td class="note">-</td>
             <td><button class="del-btn edit-only" onclick="delTask('35')">✕</button></td>
+        </tr>
+        <tr data-project="claude" data-status="未着手">
+            <td class="id">36</td>
+            <td><span class="tag project">claude</span></td>
+            <td class="phase">-</td>
+            <td>-</td>
+            <td class="action">アーム2本で試す</td>
+            <td><span class="badge priority-none">-</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('36', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">7/10</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('36')">✕</button></td>
         </tr>
     </tbody>
   </table>
