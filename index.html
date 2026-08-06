@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasks</title>
+<title>Today</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f5f5f7; color: #1d1d1f; font-size: 13px; }
@@ -69,12 +69,15 @@
   .add-form button { padding: 6px 14px; border: none; border-radius: 6px; background: #1d1d1f; color: white; font-size: 12px; cursor: pointer; }
   .status-sel { padding: 3px 6px; border: 1px solid #d1d1d6; border-radius: 6px; font-size: 11px; }
   .del-btn { border: none; background: none; color: #c0392b; cursor: pointer; font-size: 13px; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: #1d1d1f; }
+  th.sortable .sort-arrow { margin-left: 4px; opacity: 0.5; }
 </style>
 </head>
 <body>
 <header>
   <div>
-    <h1>Tasks</h1>
+    <h1>Today</h1>
     <div class="subtitle">Spline Design Hub</div>
   </div>
 </header>
@@ -86,7 +89,7 @@
 
 <div class="tech-trends-wrap">
   <div class="section-title">Tech Trends</div>
-  <div class="tech-trends-body"><h3 class="tt-date">2026/08/06</h3><h4 class="tt-section">Tech Trends</h4><ul><li>Serve Robotics（配送ロボット運営）が本日Q2決算発表。年初来48%安からロボティクス株全体が反発し、Ouster（LiDARセンサー）・Symbotic（倉庫自動化）も上昇。</li><li>米国株式市場は8月に入り最高値を更新、Amazonが時価総額$3兆を初めて突破。</li><li>世界半導体売上が2026年5月に$1,206億で過去最高、15ヶ月連続の月間最高更新。Broadcomは今四半期のAI半導体売上を前年比+200%の$160億、Micronは$500億規模の四半期売上を見込む。</li><li>Black Forest LabsとMimicのマルチモーダルAIモデル「FLUX 3」がAudi生産ラインで稼働、101ミリ秒の反応速度でソフトシール・ケーブル配線作業を処理。</li></ul><h4 class="tt-section">注目銘柄（新規）</h4><ul><li>$SERV：Serve Robotics — 配送ロボット運営、本日Q2決算発表。年初来48%安からの反発局面（$5.66 -0.53%）</li><li>$OUST：Ouster — LiDARセンサーメーカー、ロボティクス株反発の一角として上昇</li><li>$SYM：Symbotic — 倉庫自動化ロボティクス、同じく反発の一角</li></ul><h4 class="tt-section">ポートフォリオ・ウォッチリスト</h4><ul><li>$AMZN：時価総額$3兆を初めて突破。倉庫自動化（Symbotic等のトレンド）との連動、AWS/物流効率化の進捗を監視</li><li>$AVGO：今四半期のAI半導体売上を前年比+200%の$160億に見通し。ガイダンス達成度を監視</li><li>$MU：$500億規模の四半期売上を見込む。HBM需要の強さを裏付け</li></ul></div>
+  <div class="tech-trends-body"><h3 class="tt-date">2026/08/07</h3><h4 class="tt-section">Tech Trends</h4><ul><li>Boston DynamicsのAtlas量産が本格化、2026年分の出荷先は全て確定済み。HyundaiとGoogle DeepMindへのフリート出荷が予定されている。</li><li>D-Wave QuantumがNasdaq Verafinと提携、量子ハイブリッド計算（量子コンピュータと従来型コンピュータを組み合わせる手法）を金融犯罪検知に活用する取り組みを開始。</li><li>欧州宇宙機関(ESA)がイタリアの地球観測センターに初の量子コンピュータ「Bell-1」を設置、衛星データ処理の高速化に量子技術を統合する検証を開始。</li><li>世界半導体売上が2026年5月に$1,206億で過去最高、Broadcomは今四半期のAI半導体売上を前年比+200%の$160億、Micronは$500億規模の四半期売上を見込む。</li></ul><h4 class="tt-section">注目銘柄（新規）</h4><ul><li>$QBTS：D-Wave Quantum — Nasdaq Verafinと提携し量子ハイブリッド計算を金融犯罪検知に応用（$19.41 -9.28%）</li><li>$NDAQ：Nasdaq — 傘下VerafinがD-Waveと量子ハイブリッド計算による金融犯罪検知で提携</li><li>$HYMTF：Hyundai Motor — Boston Dynamics Atlasのフリート出荷先の一つとして量産ヒューマノイド導入へ</li></ul><h4 class="tt-section">ポートフォリオ・ウォッチリスト</h4><ul><li>$GOOG：傘下Google DeepMindがBoston Dynamics Atlasのフリート出荷先に。物理AI領域への展開を監視</li><li>$AVGO：今四半期のAI半導体売上を前年比+200%の$160億に見通し。ガイダンス達成度を監視</li><li>$MU：$500億規模の四半期売上を見込む。HBM需要の強さを裏付け</li></ul></div>
 </div>
 
 <div class="summary">
@@ -121,7 +124,7 @@
     <thead>
       <tr>
         <th>#</th><th>プロジェクト</th><th>フェーズ</th><th>課題</th><th>アクション</th>
-        <th>優先度</th><th>ステータス</th><th>期限</th><th>備考</th><th></th>
+        <th>優先度</th><th>ステータス</th><th class="sortable" onclick="sortByDeadline()">期限 <span class="sort-arrow" id="deadline-sort-arrow">↑</span></th><th>備考</th><th></th>
       </tr>
     </thead>
     <tbody id="task-body">
@@ -655,6 +658,28 @@
       const matchS = activeStatus === 'ALL' || row.dataset.status === activeStatus;
       row.classList.toggle('hidden', !(matchP && matchS));
     });
+  }
+
+  let deadlineSortAsc = true;
+
+  function parseDeadlineSort(text) {
+    if (text === '-') return Infinity;
+    const parts = text.split('/');
+    if (parts.length < 2) return Infinity;
+    return parseInt(parts[0], 10) * 100 + parseInt(parts[1], 10);
+  }
+
+  function sortByDeadline() {
+    const tbody = document.getElementById('task-body');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort((a, b) => {
+      const da = parseDeadlineSort(a.querySelector('.deadline').textContent.trim());
+      const db = parseDeadlineSort(b.querySelector('.deadline').textContent.trim());
+      return deadlineSortAsc ? da - db : db - da;
+    });
+    rows.forEach(r => tbody.appendChild(r));
+    document.getElementById('deadline-sort-arrow').textContent = deadlineSortAsc ? '↑' : '↓';
+    deadlineSortAsc = !deadlineSortAsc;
   }
 
   function markOverdueDeadlines() {
