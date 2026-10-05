@@ -84,7 +84,7 @@
 
 <div class="today-wrap">
   <div class="section-title">今日のタスク</div>
-  <div class="ts-group"><span class="tag">PR</span><ul><li>GGG写真もらう（進行中）</li><li>Takashimaya BGM待ち（進行中）</li></ul></div><div class="ts-group"><span class="tag">itl</span><ul><li>⚠️ 集光レンズを使ったプロトタイプ作成（9/16）</li><li>⚠️ XC330-T181-T の到着日を神山さんに確認（9/14）</li><li>⚠️ DYNAMIXEL Wizard 2.0 でID・ボーレート設定（9/16）</li><li>⚠️ XC330とXL430のケーブル互換を現物確認（変換ケーブル要否）（9/15）</li><li>⚠️ Bambu出力部品＋XC330＋ITLレンズで1灯組み立て（9/16）</li><li>⚠️ dynamixel_controllerX9.py を1灯XC330用に改修（ID・可動域）（9/16）</li><li>⚠️ 灯具質量からXC330の駆動可否を検証（9/16）</li><li>⚠️ 暗所で照射確認（300lx / 高さ2.5m / 3500K）（9/16）</li><li>⚠️ 9/17中間発表のシナリオ作成＋モーター未着時の手動デモ代替案（9/17）</li></ul></div><div class="ts-group"><span class="tag">cartier</span><ul><li>⚠️ 神山さんから基板・板金データ共有してもらう（8/14）</li><li>⚠️ 筐体用フレーム発注（9/14）</li><li>⚠️ グレイ美術筐体フレーム設計待ち（8/24）</li><li>⚠️ 仮組み（9/21）</li></ul></div>
+  <div class="ts-group"><span class="tag">PR</span><ul><li>GGG写真もらう（進行中）</li><li>Takashimaya BGM待ち（進行中）</li></ul></div><div class="ts-group"><span class="tag">itl</span><ul><li>⚠️ 集光レンズを使ったプロトタイプ作成（9/16）</li><li>⚠️ 灯具質量からXC330の駆動可否を検証（9/16）</li><li>⚠️ 暗所で照射確認（300lx / 高さ2.5m / 3500K）（9/16）</li></ul></div>
 </div>
 
 <div class="tech-trends-wrap">
@@ -93,16 +93,16 @@
 </div>
 
 <div class="summary">
-  <div class="card todo"><div class="num">26</div><div class="label">未着手</div></div>
-  <div class="card wip"><div class="num">4</div><div class="label">進行中</div></div>
+  <div class="card todo"><div class="num">11</div><div class="label">未着手</div></div>
+  <div class="card wip"><div class="num">3</div><div class="label">進行中</div></div>
   <div class="card done"><div class="num">1</div><div class="label">完了</div></div>
-  <div class="card"><div class="num">31</div><div class="label">合計</div></div>
+  <div class="card"><div class="num">15</div><div class="label">合計</div></div>
 </div>
 
 <div class="filters">
   <div class="filter-row">
     <span class="filter-label">プロジェクト</span>
-    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'PR', this)">PR</button><button class="filter-btn" onclick="filter('project', 'cartier', this)">cartier</button><button class="filter-btn" onclick="filter('project', 'claude', this)">claude</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button></div>
+    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'PR', this)">PR</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button></div>
   </div>
   <div class="filter-row">
     <span class="filter-label">ステータス</span>
@@ -237,186 +237,6 @@
             <td class="note">-</td>
             <td><button class="del-btn edit-only" onclick="delTask('52')">✕</button></td>
         </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">73</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">神山さんから基板・板金データ共有してもらう</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('73', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">8/14</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('73')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">74</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">筐体用フレーム設計</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('74', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">-</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('74')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">75</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">筐体用フレーム発注</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('75', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/14</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('75')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">76</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">基板・板金データとの干渉チェック</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('76', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">-</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('76')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">77</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">機構モック用フレーム発注</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('77', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">-</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('77')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">103</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">グレイ美術筐体フレーム設計待ち</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('103', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">8/24</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('103')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">104</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">仮組み</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('104', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/21</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('104')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">141</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">インナーパネル 下バーとの距離8→10mmに変更</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('141', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">-</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('141')">✕</button></td>
-        </tr>
-        <tr data-project="cartier" data-status="未着手">
-            <td class="id">142</td>
-            <td><span class="tag project">cartier</span></td>
-            <td class="phase">-</td>
-            <td>-</td>
-            <td class="action">インナーパネル 高さ変えれるようにする</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('142', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">-</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('142')">✕</button></td>
-        </tr>
-        <tr data-project="claude" data-status="未着手">
-            <td class="id">169</td>
-            <td><span class="tag project">claude</span></td>
-            <td class="phase">-</td>
-            <td>主軸Dynamixel #1</td>
-            <td class="action">バス系統を決定（独立TTL or デイジーチェーン）</td>
-            <td><span class="badge priority-none">-</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('169', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">-</td>
-            <td class="note">-</td>
-            <td><button class="del-btn edit-only" onclick="delTask('169')">✕</button></td>
-        </tr>
-        <tr data-project="itl" data-status="進行中">
-            <td class="id">174</td>
-            <td><span class="tag project">itl</span></td>
-            <td class="phase">6.発注</td>
-            <td>モーター未着</td>
-            <td class="action">XC330-T181-T の到着日を神山さんに確認</td>
-            <td><span class="badge priority-high">高</span></td>
-            <td><span class="badge status-wip status-badge">進行中</span><select class="status-sel edit-only" onchange="setStatus('174', this.value)"><option value="未着手">未着手</option><option value="進行中" selected>進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/14</td>
-            <td class="note">神山さん購入済み</td>
-            <td><button class="del-btn edit-only" onclick="delTask('174')">✕</button></td>
-        </tr>
-        <tr data-project="itl" data-status="未着手">
-            <td class="id">175</td>
-            <td><span class="tag project">itl</span></td>
-            <td class="phase">7.組み立て</td>
-            <td>XC330初期設定</td>
-            <td class="action">DYNAMIXEL Wizard 2.0 でID・ボーレート設定</td>
-            <td><span class="badge priority-high">高</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('175', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/16</td>
-            <td class="note">初期ID=1 / 57600bps、既存スクリプトは115200前提</td>
-            <td><button class="del-btn edit-only" onclick="delTask('175')">✕</button></td>
-        </tr>
-        <tr data-project="itl" data-status="未着手">
-            <td class="id">176</td>
-            <td><span class="tag project">itl</span></td>
-            <td class="phase">7.組み立て</td>
-            <td>コネクタ規格差</td>
-            <td class="action">XC330とXL430のケーブル互換を現物確認（変換ケーブル要否）</td>
-            <td><span class="badge priority-high">高</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('176', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/15</td>
-            <td class="note">推測：XC330は小型コネクタで非互換の可能性</td>
-            <td><button class="del-btn edit-only" onclick="delTask('176')">✕</button></td>
-        </tr>
-        <tr data-project="itl" data-status="未着手">
-            <td class="id">177</td>
-            <td><span class="tag project">itl</span></td>
-            <td class="phase">7.組み立て</td>
-            <td>1灯モック未組立</td>
-            <td class="action">Bambu出力部品＋XC330＋ITLレンズで1灯組み立て</td>
-            <td><span class="badge priority-high">高</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('177', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/16</td>
-            <td class="note">9/17中間発表の本体</td>
-            <td><button class="del-btn edit-only" onclick="delTask('177')">✕</button></td>
-        </tr>
-        <tr data-project="itl" data-status="未着手">
-            <td class="id">178</td>
-            <td><span class="tag project">itl</span></td>
-            <td class="phase">9.ソフトウェア組み込み</td>
-            <td>制御未対応</td>
-            <td class="action">dynamixel_controllerX9.py を1灯XC330用に改修（ID・可動域）</td>
-            <td><span class="badge priority-high">高</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('178', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/16</td>
-            <td class="note">制御テーブルは既存と同一（64/11/116）</td>
-            <td><button class="del-btn edit-only" onclick="delTask('178')">✕</button></td>
-        </tr>
         <tr data-project="itl" data-status="未着手">
             <td class="id">179</td>
             <td><span class="tag project">itl</span></td>
@@ -452,18 +272,6 @@
             <td class="deadline">9/16</td>
             <td class="note">8/28決定事項ベース</td>
             <td><button class="del-btn edit-only" onclick="delTask('181')">✕</button></td>
-        </tr>
-        <tr data-project="itl" data-status="未着手">
-            <td class="id">182</td>
-            <td><span class="tag project">itl</span></td>
-            <td class="phase">4.プロトタイプテスト</td>
-            <td>発表準備</td>
-            <td class="action">9/17中間発表のシナリオ作成＋モーター未着時の手動デモ代替案</td>
-            <td><span class="badge priority-mid">中</span></td>
-            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('182', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
-            <td class="deadline">9/17</td>
-            <td class="note">14:00〜、1灯でOKとJames氏合意済み</td>
-            <td><button class="del-btn edit-only" onclick="delTask('182')">✕</button></td>
         </tr>
         <tr data-project="itl" data-status="未着手">
             <td class="id">183</td>
