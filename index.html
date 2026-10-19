@@ -93,10 +93,10 @@
 </div>
 
 <div class="summary">
-  <div class="card todo"><div class="num">18</div><div class="label">未着手</div></div>
+  <div class="card todo"><div class="num">21</div><div class="label">未着手</div></div>
   <div class="card wip"><div class="num">4</div><div class="label">進行中</div></div>
   <div class="card done"><div class="num">1</div><div class="label">完了</div></div>
-  <div class="card"><div class="num">23</div><div class="label">合計</div></div>
+  <div class="card"><div class="num">26</div><div class="label">合計</div></div>
 </div>
 
 <div class="filters">
@@ -337,25 +337,61 @@
             <td class="id">210</td>
             <td><span class="tag project">Pilot</span></td>
             <td class="phase">3.CAD設計</td>
-            <td>-</td>
-            <td class="action">モック5種の仕様（サイズ・材質・可動・設置方法）を整理</td>
+            <td>駆動方式未定</td>
+            <td class="action">①大型ボールペン：ノック部2部品の駆動方式を選定（オリエンタルモーター等）＋自立壁h900×w1330の構造案</td>
             <td><span class="badge priority-mid">中</span></td>
             <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('210', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
             <td class="deadline">-</td>
-            <td class="note">-</td>
+            <td class="note">φ300×L1000、壁裏・ネジ見せNG</td>
             <td><button class="del-btn edit-only" onclick="delTask('210')">✕</button></td>
         </tr>
         <tr data-project="Pilot" data-status="未着手">
             <td class="id">211</td>
             <td><span class="tag project">Pilot</span></td>
             <td class="phase">3.CAD設計</td>
-            <td>フィジビリ未検討</td>
-            <td class="action">代表1種でCADを作り、構造・製作方法を検討</td>
+            <td>機構未定</td>
+            <td class="action">②シャープペン：3自由度（紫部品の水平移動・開閉・芯の水平移動）の機構案</td>
             <td><span class="badge priority-mid">中</span></td>
             <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('211', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
             <td class="deadline">-</td>
-            <td class="note">-</td>
+            <td class="note">芯2-3回飛び出し→戻る</td>
             <td><button class="del-btn edit-only" onclick="delTask('211')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">216</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">4.プロトタイプテスト</td>
+            <td>表現未検証</td>
+            <td class="action">③万年筆ペン芯：実物を購入してインキの流れを観察→乳白で試作</td>
+            <td><span class="badge priority-mid">中</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('216', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">LED・リング基板案</td>
+            <td><button class="del-btn edit-only" onclick="delTask('216')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">217</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>クッション方式未定</td>
+            <td class="action">④ボールペンチップ：クッション機構（バネ+ダンパー or Dynamixel）とストロークの検討</td>
+            <td><span class="badge priority-mid">中</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('217', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">置くだけで設置できる円柱部にアクチュエータ</td>
+            <td><button class="del-btn edit-only" onclick="delTask('217')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">218</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>要クライアント確認</td>
+            <td class="action">④の風の強弱・ストローク量をクライアントに確認</td>
+            <td><span class="badge priority-mid">中</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('218', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('218')">✕</button></td>
         </tr>
         <tr data-project="BEG" data-status="未着手">
             <td class="id">212</td>
