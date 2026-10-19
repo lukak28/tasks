@@ -84,7 +84,7 @@
 
 <div class="today-wrap">
   <div class="section-title">今日のタスク</div>
-  <div class="ts-group"><span class="tag">PR</span><ul><li>GGG写真もらう（進行中）</li><li>Takashimaya BGM待ち（進行中）</li></ul></div><div class="ts-group"><span class="tag">itl</span><ul><li>⚠️ 集光レンズを使ったプロトタイプ作成（9/16）</li><li>⚠️ 灯具質量からXC330の駆動可否を検証（9/16）</li><li>⚠️ 暗所で照射確認（300lx / 高さ2.5m / 3500K）（9/16）</li><li>⚠️ 5台モック確認（10/19）</li></ul></div>
+  <div class="ts-group"><span class="tag">PR</span><ul><li>GGG写真もらう（進行中）</li><li>Takashimaya BGM待ち（進行中）</li></ul></div><div class="ts-group"><span class="tag">itl</span><ul><li>⚠️ 集光レンズを使ったプロトタイプ作成（9/16）</li><li>⚠️ 灯具質量からXC330の駆動可否を検証（9/16）</li><li>⚠️ 暗所で照射確認（300lx / 高さ2.5m / 3500K）（9/16）</li><li>⚠️ 5台モック確認（10/19）</li></ul></div><div class="ts-group"><span class="tag">Pilot</span><ul><li>展示日・搬入日などの日程を確認</li><li>構想DR・設計DR・出図の日程案をTeamsで提示</li></ul></div><div class="ts-group"><span class="tag">BEG</span><ul><li>Slack #prj26-2a1_beg を読んで現状を把握</li><li>テンキ・神山さんに仮組みの結果と課題をヒアリング</li><li>2月末発送から逆算したマスタースケジュールを作成</li></ul></div>
 </div>
 
 <div class="tech-trends-wrap">
@@ -93,16 +93,16 @@
 </div>
 
 <div class="summary">
-  <div class="card todo"><div class="num">10</div><div class="label">未着手</div></div>
+  <div class="card todo"><div class="num">18</div><div class="label">未着手</div></div>
   <div class="card wip"><div class="num">4</div><div class="label">進行中</div></div>
   <div class="card done"><div class="num">1</div><div class="label">完了</div></div>
-  <div class="card"><div class="num">15</div><div class="label">合計</div></div>
+  <div class="card"><div class="num">23</div><div class="label">合計</div></div>
 </div>
 
 <div class="filters">
   <div class="filter-row">
     <span class="filter-label">プロジェクト</span>
-    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'PR', this)">PR</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button></div>
+    <div id="proj-filters"><button class="filter-btn active" onclick="filter('project', 'ALL', this)">すべて</button><button class="filter-btn" onclick="filter('project', 'BEG', this)">BEG</button><button class="filter-btn" onclick="filter('project', 'PR', this)">PR</button><button class="filter-btn" onclick="filter('project', 'Pilot', this)">Pilot</button><button class="filter-btn" onclick="filter('project', 'itl', this)">itl</button></div>
   </div>
   <div class="filter-row">
     <span class="filter-label">ステータス</span>
@@ -308,6 +308,102 @@
             <td class="deadline">10/19</td>
             <td class="note">作成は三谷・テンキが代行</td>
             <td><button class="del-btn edit-only" onclick="delTask('192')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">208</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>日程不明</td>
+            <td class="action">展示日・搬入日などの日程を確認</td>
+            <td><span class="badge priority-high">高</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('208', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('208')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">209</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">2.企画fix</td>
+            <td>-</td>
+            <td class="action">構想DR・設計DR・出図の日程案をTeamsで提示</td>
+            <td><span class="badge priority-high">高</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('209', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">#208の確認後</td>
+            <td><button class="del-btn edit-only" onclick="delTask('209')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">210</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>-</td>
+            <td class="action">モック5種の仕様（サイズ・材質・可動・設置方法）を整理</td>
+            <td><span class="badge priority-mid">中</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('210', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('210')">✕</button></td>
+        </tr>
+        <tr data-project="Pilot" data-status="未着手">
+            <td class="id">211</td>
+            <td><span class="tag project">Pilot</span></td>
+            <td class="phase">3.CAD設計</td>
+            <td>フィジビリ未検討</td>
+            <td class="action">代表1種でCADを作り、構造・製作方法を検討</td>
+            <td><span class="badge priority-mid">中</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('211', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('211')">✕</button></td>
+        </tr>
+        <tr data-project="BEG" data-status="未着手">
+            <td class="id">212</td>
+            <td><span class="tag project">BEG</span></td>
+            <td class="phase">5.CAD修正</td>
+            <td>現状不明</td>
+            <td class="action">Slack #prj26-2a1_beg を読んで現状を把握</td>
+            <td><span class="badge priority-high">高</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('212', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('212')">✕</button></td>
+        </tr>
+        <tr data-project="BEG" data-status="未着手">
+            <td class="id">213</td>
+            <td><span class="tag project">BEG</span></td>
+            <td class="phase">5.CAD修正</td>
+            <td>現状不明</td>
+            <td class="action">テンキ・神山さんに仮組みの結果と課題をヒアリング</td>
+            <td><span class="badge priority-high">高</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('213', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">-</td>
+            <td><button class="del-btn edit-only" onclick="delTask('213')">✕</button></td>
+        </tr>
+        <tr data-project="BEG" data-status="未着手">
+            <td class="id">214</td>
+            <td><span class="tag project">BEG</span></td>
+            <td class="phase">5.CAD修正</td>
+            <td>-</td>
+            <td class="action">2月末発送から逆算したマスタースケジュールを作成</td>
+            <td><span class="badge priority-high">高</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('214', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">設営3月末</td>
+            <td><button class="del-btn edit-only" onclick="delTask('214')">✕</button></td>
+        </tr>
+        <tr data-project="BEG" data-status="未着手">
+            <td class="id">215</td>
+            <td><span class="tag project">BEG</span></td>
+            <td class="phase">5.CAD修正</td>
+            <td>-</td>
+            <td class="action">仮組みを反映した設計アップデートをレビュー</td>
+            <td><span class="badge priority-mid">中</span></td>
+            <td><span class="badge status-todo status-badge">未着手</span><select class="status-sel edit-only" onchange="setStatus('215', this.value)"><option value="未着手" selected>未着手</option><option value="進行中">進行中</option><option value="完了">完了</option></select></td>
+            <td class="deadline">-</td>
+            <td class="note">テンキ設計</td>
+            <td><button class="del-btn edit-only" onclick="delTask('215')">✕</button></td>
         </tr>
     </tbody>
   </table>
